@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "format": "npm run cmd:prettier -- --write",
+    "format:check": "npm run cmd:prettier -- --check",
+    "cmd:prettier": "prettier **/*.{js,ts,json,html,css,md} !**/package-lock.json"
   },
   "private": true,
   "dependencies": {
@@ -24,12 +27,16 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.900.3",
+    "@angular-devkit/build-ng-packagr": "~0.900.3",
     "@angular/cli": "~9.0.3",
     "@angular/compiler-cli": "~9.0.2",
     "@angular/language-service": "~9.0.2",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
+    "ag-grid-angular": "^22.1.1",
+    "ag-grid-community": "^22.1.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -38,6 +45,8 @@
     "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
+    "ng-packagr": "^9.0.0",
+    "prettier": "^1.19.1",
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
