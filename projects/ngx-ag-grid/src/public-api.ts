@@ -3,4 +3,7 @@
  */
 
 export * from './lib/template-cell-renderer';
+export * from './lib/col-tpl';
 export * from './lib/ngx-ag-grid.module';
+export * from './lib/util/logger';
+export * from './lib/util/logger-token';

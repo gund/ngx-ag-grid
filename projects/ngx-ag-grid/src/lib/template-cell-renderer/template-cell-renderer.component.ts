@@ -8,13 +8,17 @@ import {
 import { AgRendererComponent } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
-export interface TemplateCellRendererParams extends ICellRendererParams {
-  tpl: TemplateRef<CellTemplateContext>;
+export interface TemplateCellRendererParamsExtra {
+  tpl: TemplateRef<TemplateCellContext>;
   classes?: string | string[] | Record<string, boolean | undefined | null>;
   styles?: Record<string, string | number>;
 }
 
-export interface CellTemplateContext<T = unknown>
+export interface TemplateCellRendererParams
+  extends TemplateCellRendererParamsExtra,
+    ICellRendererParams {}
+
+export interface TemplateCellContext<T = unknown>
   extends TemplateCellRendererParams {
   $implicit: T;
 }
@@ -22,7 +26,7 @@ export interface CellTemplateContext<T = unknown>
 /**
  * Cell renderer component for AgGrid that allows to render Angular`s template inside.
  *
- * It expects that a {@see TemplateRef} will be set in ColumnDef in parameters for renderer.
+ * It expects that a {@link TemplateRef} will be set in ColumnDef in parameters for renderer.
  *
  * @see TemplateCellRendererParams
  */
@@ -38,8 +42,8 @@ export interface CellTemplateContext<T = unknown>
   encapsulation: ViewEncapsulation.None,
 })
 export class TemplateCellRendererComponent implements AgRendererComponent {
-  tpl?: TemplateRef<CellTemplateContext>;
-  ctx?: CellTemplateContext;
+  tpl?: TemplateRef<TemplateCellContext>;
+  ctx?: TemplateCellContext;
 
   @HostBinding('class') classes?: TemplateCellRendererParams['classes'];
   @HostBinding('style') styles?: TemplateCellRendererParams['styles'];
