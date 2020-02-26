@@ -16,7 +16,10 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "ngx-ag-grid": ["dist/ngx-ag-grid/ngx-ag-grid", "dist/ngx-ag-grid"]
+      "ngx-ag-grid": [
+        "dist/ngx-ag-grid/ngx-ag-grid",
+        "projects/ngx-ag-grid/src/public-api.ts"
+      ]
     }
   },
   "angularCompilerOptions": {
