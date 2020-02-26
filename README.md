@@ -1,6 +1,6 @@
 # NgxAgGrid [WIP]
 
-> Useful things for AgGrid and Angular integrated usage
+> Useful things for better integration between AgGrid and Angular
 
 ## Install
 

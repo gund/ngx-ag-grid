@@ -1,7 +1,7 @@
 {
   "name": "ngx-ag-grid",
   "version": "0.0.0",
-  "description": "Useful things for AgGrid and Angular integrated usage",
+  "description": "Useful things for better integration between AgGrid and Angular",
   "author": "Alex Malkevich <malkevich.alex@gmail.com>",
   "license": "MIT",
   "keywords": [
