@@ -1,33 +1,31 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DebugElement,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, DebugElement, TemplateRef, ViewChild } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { TemplateCellRendererComponent } from './template-cell-renderer.component';
+import {
+  TemplateCellRendererComponent,
+  TemplateCellRendererParams,
+} from './template-cell-renderer.component';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'host-comp',
   template: `
     <ng-template #tpl>some tpl</ng-template>
     <ng-template #tplValue let-value>value: {{ value }}</ng-template>
-    <ng-template #tplValueData let-value let-data="data"
-      >value: {{ value }}, data: {{ data }}</ng-template
-    >
+    <ng-template #tplValueData let-value let-data="data">
+      value: {{ value }}, data: {{ data }}
+    </ng-template>
     <mcm-template-cell-renderer></mcm-template-cell-renderer>
   `,
 })
 class HostComponent {
   @ViewChild('tpl', { static: true })
-  tpl: TemplateRef<any>;
+  tpl?: TemplateRef<any>;
   @ViewChild('tplValue', { static: true })
-  tplValue: TemplateRef<any>;
+  tplValue?: TemplateRef<any>;
   @ViewChild('tplValueData', { static: true })
-  tplValueData: TemplateRef<any>;
+  tplValueData?: TemplateRef<any>;
 }
 
 describe('TemplateCellRendererComponent', () => {
@@ -36,13 +34,13 @@ describe('TemplateCellRendererComponent', () => {
   let componentElem: DebugElement;
   let component: TemplateCellRendererComponent;
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TemplateCellRendererComponent, HostComponent],
-    }).overrideComponent(TemplateCellRendererComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.Default },
-    });
+    }).compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
 
@@ -56,7 +54,7 @@ describe('TemplateCellRendererComponent', () => {
   it('should render value as is when no template provided', () => {
     component.agInit({
       value: 'my value',
-    } as any);
+    } as TemplateCellRendererParams);
 
     fixture.detectChanges();
 
@@ -67,7 +65,7 @@ describe('TemplateCellRendererComponent', () => {
     component.agInit({
       tpl: hostComp.tplValue,
       value: 'my value',
-    } as any);
+    } as TemplateCellRendererParams);
 
     fixture.detectChanges();
 
@@ -79,7 +77,7 @@ describe('TemplateCellRendererComponent', () => {
       tpl: hostComp.tplValueData,
       value: 'my value',
       data: 'my data',
-    } as any);
+    } as TemplateCellRendererParams);
 
     fixture.detectChanges();
 
