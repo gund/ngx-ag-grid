@@ -43,7 +43,7 @@ export interface TemplateCellContext<T = unknown>
 })
 export class TemplateCellRendererComponent implements AgRendererComponent {
   tpl?: TemplateRef<TemplateCellContext>;
-  ctx?: TemplateCellContext;
+  ctx: TemplateCellContext | null = null;
 
   @HostBinding('class') classes?: TemplateCellRendererParams['classes'];
   @HostBinding('style') styles?: TemplateCellRendererParams['styles'];
