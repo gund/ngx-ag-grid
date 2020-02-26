@@ -1,4 +1,16 @@
-# NgxAgGrid
+# NgxAgGrid [WIP]
+
+> Useful things for AgGrid and Angular integrated usage
+
+## Install
+
+TBD
+
+## Usage
+
+TBD
+
+---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
 
