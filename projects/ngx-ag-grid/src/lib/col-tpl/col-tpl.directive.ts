@@ -23,7 +23,8 @@ import {
   TemplateCellRendererComponent,
   TemplateCellRendererParamsExtra,
 } from '../template-cell-renderer';
-import { Logger, LOGGER_TOKEN } from '../util/logger';
+import { Logger } from '../util/logger';
+import { LOGGER_TOKEN } from '../util/logger-token';
 import { SafeIntersection } from '../util/types';
 
 export interface ColTplCellRendererParams
@@ -116,7 +117,8 @@ export class ColTplDirective
   @Input() nagColTplClass?: TemplateCellRendererParamsExtra['classes'];
   /**
    * Styles to apply to the template.
-   * Supports syntax of {@link import('@angular/common').NgStyle} directive.
+   * Supports only simple syntax of {@link import('@angular/common').NgStyle} directive
+   * where keys can be only CSS property names and values are strings with required units.
    */
   @Input() nagColTplStyle?: TemplateCellRendererParamsExtra['styles'];
   /**

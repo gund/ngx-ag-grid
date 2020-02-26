@@ -9,9 +9,9 @@ import { AgRendererComponent } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
 export interface TemplateCellRendererParamsExtra {
-  tpl: TemplateRef<TemplateCellContext>;
+  tpl?: TemplateRef<TemplateCellContext>;
   classes?: string | string[] | Record<string, boolean | undefined | null>;
-  styles?: Record<string, string | number>;
+  styles?: Record<string, string>;
 }
 
 export interface TemplateCellRendererParams
