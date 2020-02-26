@@ -16,7 +16,7 @@ import {
     <ng-template #tplValueData let-value let-data="data">
       value: {{ value }}, data: {{ data }}
     </ng-template>
-    <mcm-template-cell-renderer></mcm-template-cell-renderer>
+    <nag-template-cell-renderer></nag-template-cell-renderer>
   `,
 })
 class HostComponent {
@@ -42,7 +42,6 @@ describe('TemplateCellRendererComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HostComponent);
-    fixture.detectChanges();
 
     hostComp = fixture.componentInstance;
     componentElem = fixture.debugElement.query(
@@ -52,9 +51,7 @@ describe('TemplateCellRendererComponent', () => {
   });
 
   it('should render value as is when no template provided', () => {
-    component.agInit({
-      value: 'my value',
-    } as TemplateCellRendererParams);
+    component.agInit(createParams({ value: 'my value' }));
 
     fixture.detectChanges();
 
@@ -62,10 +59,12 @@ describe('TemplateCellRendererComponent', () => {
   });
 
   it('should render template with implicit value', () => {
-    component.agInit({
-      tpl: hostComp.tplValue,
-      value: 'my value',
-    } as TemplateCellRendererParams);
+    component.agInit(
+      createParams({
+        tpl: hostComp.tplValue,
+        value: 'my value',
+      }),
+    );
 
     fixture.detectChanges();
 
@@ -73,11 +72,13 @@ describe('TemplateCellRendererComponent', () => {
   });
 
   it('should render template with implicit value and data', () => {
-    component.agInit({
-      tpl: hostComp.tplValueData,
-      value: 'my value',
-      data: 'my data',
-    } as TemplateCellRendererParams);
+    component.agInit(
+      createParams({
+        tpl: hostComp.tplValueData,
+        value: 'my value',
+        data: 'my data',
+      }),
+    );
 
     fixture.detectChanges();
 
@@ -85,4 +86,62 @@ describe('TemplateCellRendererComponent', () => {
       'value: my value, data: my data',
     );
   });
+
+  describe('refresh() method', () => {
+    it('should call `updateTpl()` with `params`', () => {
+      const updateTplSpy = spyOn(component as any, 'updateTpl');
+      const params = createParams({});
+
+      component.refresh(params);
+
+      expect(updateTplSpy).toHaveBeenCalledWith(params);
+    });
+  });
+
+  describe('classes on host', () => {
+    it('should set from single string class', () => {
+      component.agInit(createParams({ classes: 'cls' }));
+
+      fixture.detectChanges();
+
+      expect(componentElem.classes.cls).toBeTruthy();
+    });
+
+    it('should set from array of strings classes', () => {
+      component.agInit(createParams({ classes: ['cls1', 'cls2'] }));
+
+      fixture.detectChanges();
+
+      expect(componentElem.classes.cls1).toBeTruthy();
+      expect(componentElem.classes.cls2).toBeTruthy();
+    });
+
+    it('should set from object of enabled classes', () => {
+      component.agInit(createParams({ classes: { cls1: true, cls2: false } }));
+
+      fixture.detectChanges();
+
+      expect(componentElem.classes.cls1).toBeTruthy();
+      expect(componentElem.classes.cls2).toBeFalsy();
+    });
+  });
+
+  describe('styles on host', () => {
+    it('should set from object of styles', () => {
+      component.agInit(
+        createParams({ styles: { display: 'block', width: '20px' } }),
+      );
+
+      fixture.detectChanges();
+
+      expect(componentElem.styles.display).toBe('block');
+      expect(componentElem.styles.width).toBe('20px');
+    });
+  });
 });
+
+function createParams(
+  params: Partial<TemplateCellRendererParams>,
+): TemplateCellRendererParams {
+  return params as TemplateCellRendererParams;
+}
