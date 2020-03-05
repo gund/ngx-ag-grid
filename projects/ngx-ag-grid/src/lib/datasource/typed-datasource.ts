@@ -41,11 +41,3 @@ export interface TypedDatasource<
   __capturedFilters?: F;
   getRows(params: AllTypedGetRowsParams<F, S>): void;
 }
-
-export type InferDatasourceType<D> = D extends TypedDatasource<infer T, any>
-  ? T
-  : never;
-
-export type InferDatasourceFilters<D> = D extends TypedDatasource<any, infer F>
-  ? F
-  : never;

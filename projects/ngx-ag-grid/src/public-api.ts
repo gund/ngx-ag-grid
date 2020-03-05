@@ -10,6 +10,10 @@ export * from './lib/col-def/col-def';
 export * from './lib/col-def/factories';
 export * from './lib/col-def/filter';
 
+export * from './lib/datasource/datasource';
+export * from './lib/datasource/typed-datasource';
+export * from './lib/datasource/fetcher-adapter';
+
 export * from './lib/grid/grid-def';
 
 export * from './lib/util/logger';
