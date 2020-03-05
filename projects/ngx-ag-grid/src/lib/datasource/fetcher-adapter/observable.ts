@@ -10,19 +10,19 @@ import {
 } from 'rxjs/operators';
 
 import {
-  AllTypedGetRowsParams,
-  DatasourceFetcher,
-  DatasourceFetcherAdapter,
-} from '../datasource';
-import {
   DatasourceAdapterFactory,
   GRID_DATASOURCE_ADAPTER,
   GridDefinition,
   InferGridDefinitionFilters,
   InferGridDefinitionSorting,
   InferGridDefinitionType,
-} from '../grid';
-import { paramsToOptions } from './params';
+} from '../../grid';
+import {
+  DatasourceFetcher,
+  DatasourceFetcherAdapter,
+} from '../fetcher-adapter';
+import { paramsToOptions } from '../params';
+import { AllTypedGetRowsParams } from '../typed-datasource';
 
 export interface FetcherAdapterObservableOptions {
   cancelPrevRequest?: boolean;
