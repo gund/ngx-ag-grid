@@ -1,7 +1,7 @@
+import { ColumnVO } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 
 import { DatasourceFilterModel, DatasourceSortModel } from './datasource';
-import { InferDatasourceSorting } from './datasource.infer';
 import { AllTypedGetRowsParams, TypedDatasource } from './typed-datasource';
 
 export interface DatasourceFetcherAdapter<
@@ -9,8 +9,8 @@ export interface DatasourceFetcherAdapter<
   T,
   /** Filter model */
   F = never,
-  /** Sort model - only specify when auto inference is incorrect */
-  S extends string = InferDatasourceSorting<F>
+  /** Sort model */
+  S = string
 > extends TypedDatasource<T, F, S> {
   getRows(params: AllTypedGetRowsParams<F, S>): void;
   setFetcher(fetcher: DatasourceFetcher<T, F, S>): void;
@@ -23,20 +23,25 @@ export type DatasourceFetcher<
   /** Filter model */
   F = never,
   /** Sort model */
-  S extends string = string
+  S = string
 > = (
-  options: DatasourceFetcherPaging & DatasourceFetcherOptions<F, S>,
+  options: DatasourceFetcherOptions<F, S>,
 ) => Observable<DatasourceFetcherResult<T>>;
 
 export interface DatasourceFetcherOptions<
   /** Filter model */
   F = never,
   /** Sort model */
-  S extends string = string
-> {
-  filterModel: F extends never ? DatasourceFilterModel : F;
-  sortModel: DatasourceSortModel<S>[];
-  groupKeys: string[];
+  S = string
+> extends DatasourceFetcherPaging {
+  filterModel?: F extends never ? DatasourceFilterModel : F;
+  sortModel?: DatasourceSortModel<S>[];
+  groupKeys?: string[];
+  rowGroupCols?: ColumnVO[];
+  valueCols?: ColumnVO[];
+  pivotCols?: ColumnVO[];
+  pivotMode: boolean;
+  context?: any;
 }
 
 export interface DatasourceFetcherPaging {

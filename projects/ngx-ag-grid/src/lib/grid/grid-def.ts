@@ -1,14 +1,13 @@
 import { GridOptions } from 'ag-grid-community';
 
-import { AnyColDef } from '../col-def/col-def';
-import { DatasourceFilterModel } from '../datasource/datasource';
+import { AnyColDef } from '../col-def';
 import {
+  DatasourceFilterModel,
   InferDatasourceFilterModel,
   InferDatasourceSorting,
-} from '../datasource/datasource.infer';
-import { TypedDatasource } from '../datasource/typed-datasource';
+  TypedDatasource,
+} from '../datasource';
 import { AnyArray } from '../util/types';
-import { defineCol, setField } from '../col-def/factories';
 
 export abstract class GridDefinition<
   /** Table data type */

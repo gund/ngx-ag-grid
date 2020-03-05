@@ -45,7 +45,7 @@ export interface DatasourceFilterDate extends DatasourceFilterBase {
   dateTo?: string;
 }
 
-export interface DatasourceSortModel<K extends string = string> {
+export interface DatasourceSortModel<K = string> {
   colId: K;
   sort: DatasourceSortDirection;
 }

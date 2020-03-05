@@ -1,4 +1,4 @@
-import { AnyTypedColDef, TypedColGroupDef } from '../col-def/col-def';
+import { AnyTypedColDef, TypedColGroupDef } from '../col-def';
 import {
   InferTypedColDefFilter,
   InferTypedColDefName,
