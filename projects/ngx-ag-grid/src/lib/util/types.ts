@@ -59,3 +59,8 @@ export type FilterKeysByType<T, K> = {
  * Exclude all properties from type `T` whose type extends `K`
  */
 export type ExcludePropsByType<T, K> = { [P in FilterKeysByType<T, K>]: T[P] };
+
+/**
+ * Make sure the type `T` is a string - otherwise `never`
+ */
+export type AsString<T> = T extends string ? T : never;

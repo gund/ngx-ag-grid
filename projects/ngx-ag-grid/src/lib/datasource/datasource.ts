@@ -1,21 +1,6 @@
-import {
-  IDatasource,
-  IGetRowsParams,
-  IServerSideDatasource,
-  IServerSideGetRowsParams,
-} from 'ag-grid-community';
-
-import { FilterType } from '../col-def/filter';
+import { IDatasource, IServerSideDatasource } from 'ag-grid-community';
 
 export type AnyDatasource = IDatasource | IServerSideDatasource;
-
-export interface TypedDatasource<T, F = DatasourceFilterModel>
-  extends IDatasource,
-    IServerSideDatasource {
-  __capturedType?: T[];
-  __capturedFilters?: F;
-  getRows(params: IGetRowsParams | IServerSideGetRowsParams): void;
-}
 
 export interface DatasourceFilterModel {
   [k: string]: Partial<DatasourceFilterModelMerged>;
@@ -60,8 +45,8 @@ export interface DatasourceFilterDate extends DatasourceFilterBase {
   dateTo?: string;
 }
 
-export interface DatasourceSortModel {
-  colId: string;
+export interface DatasourceSortModel<K extends string = string> {
+  colId: K;
   sort: DatasourceSortDirection;
 }
 

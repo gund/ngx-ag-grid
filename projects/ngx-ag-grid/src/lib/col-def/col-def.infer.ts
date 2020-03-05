@@ -1,3 +1,4 @@
+import { DatasourceFilterModelMerged } from '../datasource/datasource';
 import { AnyTypedColDef, TypedColGroupDef } from './col-def';
 
 export type InferTypedColDefName<T> = T extends AnyTypedColDef<infer N, any>
@@ -7,7 +8,7 @@ export type InferTypedColDefName<T> = T extends AnyTypedColDef<infer N, any>
 export type InferTypedColDefFilter<
   T,
   N extends string = any
-> = T extends AnyTypedColDef<N, infer F> ? F : never;
+> = T extends AnyTypedColDef<N, infer F> ? F : DatasourceFilterModelMerged;
 
 export type InferTypedColGroupDefChildren<T> = T extends TypedColGroupDef<
   any,

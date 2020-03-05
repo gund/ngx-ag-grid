@@ -5,24 +5,20 @@ import {
 } from '../col-def/col-def.infer';
 import {
   AnyArray,
+  AsString,
   ExcludePropsByType,
   InferArray,
   MergeIntersection,
   UnionToIntersection,
 } from '../util/types';
-import { TypedDatasource } from './datasource';
-
-export type InferDatasourceType<D> = D extends TypedDatasource<infer T, any>
-  ? T
-  : never;
-
-export type InferDatasourceFilters<D> = D extends TypedDatasource<any, infer F>
-  ? F
-  : never;
 
 export type InferDatasourceFilterModel<
   C extends AnyArray<AnyTypedColDef>
 > = MergeIntersection<UnionToIntersection<FilterModelNested<C>>>;
+
+export type InferDatasourceSorting<F> = F extends object
+  ? AsString<keyof F>
+  : string;
 
 type FilterModelNested<
   C extends AnyArray<AnyTypedColDef>,
